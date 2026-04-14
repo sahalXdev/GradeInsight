@@ -1,8 +1,8 @@
 streamlit
 pandas
 numpy
+scikit-learn
+plotly
 matplotlib
 joblib
-seaborn
-plotly
 time
