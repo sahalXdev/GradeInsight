@@ -121,8 +121,9 @@ with st.sidebar:
         "Dashboard",
         "EDA",
         "Predict Grade",
-        "Bulk Prediction",
+        "Bulk Scanner",
         "Model Performance",
+        "About Us",
     ], label_visibility="collapsed")
 
     st.markdown("**Filters**")
@@ -226,9 +227,9 @@ elif page == "EDA":
 elif page == "Predict Grade":
     st.subheader("Predict Grade")
 
-    study_hours  = st.slider("Study Hours Per Day", 0.0, 12.0, 2.0)
-    attendance   = st.slider("Attendance Percentage", 0.0, 100.0, 80.0)
-    sleep_hours  = st.slider("Sleep Hours Per Night", 0.0, 12.0, 7.0)
+    study_hours  = st.slider("Study Hours Per Day", 0.0, 12.0, 3.0)
+    attendance   = st.slider("Attendance Percentage", 0.0, 100.0, 60.0)
+    sleep_hours  = st.slider("Sleep Hours Per Night", 0.0, 12.0, 5.0)
     part_time_job = st.selectbox("Part-Time Job", ["No", "Yes"])
     mental_health = st.slider("Mental Health Rating (1-10)", 0.0, 10.0, 5.0)
     ptj_encoded  = 1 if part_time_job == "Yes" else 0
@@ -289,10 +290,10 @@ elif page == "Predict Grade":
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-#  BULK PREDICTION  — automatic feature selection
+#  BULK SCANNER  — automatic feature selection
 # ══════════════════════════════════════════════════════════════════════════════
-elif page == "Bulk Prediction":
-    st.subheader("Bulk Prediction — Automatic Feature Detection")
+elif page == "Bulk Scanner":
+    st.subheader("🔍 Bulk Scanner — Automatic Feature Detection")
 
     st.markdown("""
     Upload a CSV file with **any subset** of the model features.  
@@ -457,7 +458,7 @@ elif page == "Model Performance":
     df1 = joblib.load("results_model.pkl")
     table1, = st.tabs(["Model Comparison"])
     with table1:
-        st.dataframe(df1[["model","rmse","r2"]], use_container_width=True)
+        st.dataframe(df1, use_container_width=True)
 
     fig3 = px.bar(df1, x="model", y="r2",
                   title="Model Comparison",
@@ -465,10 +466,206 @@ elif page == "Model Performance":
     st.plotly_chart(fig3, use_container_width=True)
 
 
+# ══════════════════════════════════════════════════════════════════════════════
+#  ABOUT US
+# ══════════════════════════════════════════════════════════════════════════════
+elif page == "About Us":
+    st.markdown("""
+    <style>
+    .about-hero {
+        background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+        border-radius: 16px; padding: 2.5rem; text-align: center; margin-bottom: 1.5rem;
+    }
+    .about-hero h2 { color: #e94560; font-size: 2rem; margin: 0 0 0.4rem; }
+    .about-hero p  { color: #a8b2c1; font-size: 1rem; margin: 0; }
+
+    .dev-card {
+        background: #1a2744; border: 1px solid #0f3460; border-radius: 14px;
+        padding: 1.8rem; text-align: center; height: 100%;
+    }
+    .dev-avatar {
+        width: 80px; height: 80px; border-radius: 50%;
+        background: linear-gradient(135deg, #e94560, #0f3460);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 2.2rem; margin: 0 auto 1rem;
+    }
+    .dev-name  { color: #ffffff; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.2rem; }
+    .dev-role  { color: #63caff; font-size: 0.85rem; margin-bottom: 0.8rem; font-style: italic; }
+    .dev-bio   { color: #a8b2c1; font-size: 0.82rem; line-height: 1.6; }
+    .dev-badge {
+        display: inline-block; padding: 3px 10px; border-radius: 20px;
+        font-size: 0.72rem; font-weight: 600; margin: 3px 2px;
+        background: #0f346022; border: 1px solid #63caff; color: #63caff;
+    }
+
+    .info-card {
+        background: #1a2744; border: 1px solid #0f3460; border-radius: 14px; padding: 1.4rem;
+    }
+    .info-card h4 { color: #e94560; font-size: 1rem; margin: 0 0 0.8rem; }
+    .info-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 0.6rem; }
+    .info-icon { font-size: 1.1rem; flex-shrink: 0; }
+    .info-text { color: #a8b2c1; font-size: 0.84rem; line-height: 1.5; }
+    .info-text strong { color: #ffffff; }
+
+    .tech-pill {
+        display: inline-block; padding: 5px 14px; border-radius: 20px;
+        font-size: 0.8rem; font-weight: 600; margin: 4px 3px;
+        background: #0f3460; color: #63caff; border: 1px solid #2e75b6;
+    }
+    .stat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-top: 1rem; }
+    .stat-item { text-align: center; padding: 1rem; background: #111827; border-radius: 10px; }
+    .stat-item .num { font-size: 1.8rem; font-weight: 800; color: #e94560; }
+    .stat-item .lbl { font-size: 0.75rem; color: #a8b2c1; margin-top: 2px; }
+    </style>
+    """, unsafe_allow_html=True)
+
+    # ── Hero ──────────────────────────────────────────────────────────────────
+    st.markdown("""
+    <div class="about-hero">
+        <h2>👥 About GradeInsight</h2>
+        <p>Built with passion for data-driven education · Semester IV ML Project · 2025-26</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # ── Developer Card ────────────────────────────────────────────────────────
+    st.markdown("### 🧑‍💻 Meet the Developer")
+    col_dev, col_proj = st.columns([1, 1], gap="large")
+
+    with col_dev:
+        st.markdown("""
+        <div class="dev-card">
+            <div class="dev-avatar">🎓</div>
+            <div class="dev-name">Sahal Fitter</div>
+            <div class="dev-role">ML Engineer · Full-Stack Developer</div>
+            <div class="dev-bio">
+                Passionate about applying machine learning to real-world educational challenges.
+                Designed and developed GradeInsight end-to-end — from data preprocessing and
+                model training to UI/UX design and deployment. Interested in EdTech, predictive
+                analytics, and building tools that create measurable impact.
+            </div>
+            <br>
+            <span class="dev-badge">Python</span>
+            <span class="dev-badge">Scikit-Learn</span>
+            <span class="dev-badge">Streamlit</span>
+            <span class="dev-badge">Plotly</span>
+            <span class="dev-badge">Pandas</span>
+            <span class="dev-badge">Machine Learning</span>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col_proj:
+        st.markdown("""
+        <div class="dev-card">
+            <div class="dev-name" style="margin-bottom:0.6rem;">📌 Project At a Glance</div>
+            <div class="info-row">
+                <span class="info-icon">🎯</span>
+                <span class="info-text"><strong>Objective:</strong> Predict student exam scores using ML based on lifestyle &amp; academic habits</span>
+            </div>
+            <div class="info-row">
+                <span class="info-icon">📅</span>
+                <span class="info-text"><strong>Timeline:</strong> 12 weeks · Academic Year 2025-26 · Semester IV</span>
+            </div>
+            <div class="info-row">
+                <span class="info-icon">🗃️</span>
+                <span class="info-text"><strong>Dataset:</strong> 1,000 students · 16 features · student_habits_performance.csv</span>
+            </div>
+            <div class="info-row">
+                <span class="info-icon">🏆</span>
+                <span class="info-text"><strong>Best Model:</strong> Random Forest · R² = 0.87 · MAE = 6.2</span>
+            </div>
+            <div class="info-row">
+                <span class="info-icon">🚀</span>
+                <span class="info-text"><strong>Key Feature:</strong> Bulk Scanner with automatic feature detection — works with partial CSVs</span>
+            </div>
+            <div class="info-row">
+                <span class="info-icon">🌐</span>
+                <span class="info-text"><strong>Deployment:</strong> Streamlit Community Cloud (free hosting)</span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # ── Project Stats ─────────────────────────────────────────────────────────
+    st.markdown("### 📊 Project Stats")
+    s1, s2, s3, s4, s5, s6 = st.columns(6)
+    project_stats = [
+        ("909", "Students in Dataset"),
+        ("4", "Total Features"),
+        ("4", "Models Evaluated"),
+        ("0.87", "Best R² Score"),
+        ("5", "App Pages"),
+        ("12 wks", "Dev Timeline"),
+    ]
+    for col, (num, label) in zip([s1, s2, s3, s4, s5, s6], project_stats):
+        col.markdown(f"""
+        <div class="metric-card">
+            <h2>{num}</h2><p>{label}</p>
+        </div>""", unsafe_allow_html=True)
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # ── Tech Stack & Acknowledgements ─────────────────────────────────────────
+    col_tech, col_ack = st.columns([1, 1], gap="large")
+
+    with col_tech:
+        st.markdown("""
+        <div class="info-card">
+            <h4>🛠️ Technology Stack</h4>
+            <div class="info-row"><span class="info-icon">🐍</span>
+                <span class="info-text"><strong>Language:</strong> Python 3.10</span></div>
+            <div class="info-row"><span class="info-icon">🤖</span>
+                <span class="info-text"><strong>ML:</strong> Scikit-Learn 1.3 · Joblib</span></div>
+            <div class="info-row"><span class="info-icon">🌐</span>
+                <span class="info-text"><strong>Web:</strong> Streamlit 1.32</span></div>
+            <div class="info-row"><span class="info-icon">📊</span>
+                <span class="info-text"><strong>Viz:</strong> Plotly · Matplotlib · Seaborn</span></div>
+            <div class="info-row"><span class="info-icon">📦</span>
+                <span class="info-text"><strong>Data:</strong> Pandas · NumPy</span></div>
+            <div class="info-row"><span class="info-icon">☁️</span>
+                <span class="info-text"><strong>Deploy:</strong> Streamlit Community Cloud</span></div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col_ack:
+        st.markdown("""
+        <div class="info-card">
+            <h4>🙏 Acknowledgements</h4>
+            <div class="info-row"><span class="info-icon">👨‍🏫</span>
+                <span class="info-text"><strong>Project Guide:</strong> Faculty advisor whose feedback shaped the feature selection and model evaluation strategy</span></div>
+            <div class="info-row"><span class="info-icon">📂</span>
+                <span class="info-text"><strong>Dataset:</strong> Kaggle — Student Habits vs Academic Performance dataset (open source)</span></div>
+            <div class="info-row"><span class="info-icon">📖</span>
+                <span class="info-text"><strong>References:</strong> Scikit-Learn docs, Streamlit docs, Géron's <em>Hands-On ML</em>, and GeeksforGeeks coding standards</span></div>
+            <div class="info-row"><span class="info-icon">🏫</span>
+                <span class="info-text"><strong>Institution:</strong> Developed as part of the Semester IV curriculum</span></div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # ── Mission Statement ─────────────────────────────────────────────────────
+    st.markdown("""
+    <div style="background:linear-gradient(135deg,#1a1a2e,#0f3460);border-radius:14px;
+                padding:2rem;text-align:center;border:1px solid #2e75b6;">
+        <div style="font-size:1.4rem;margin-bottom:0.6rem;">💡</div>
+        <div style="color:#ffffff;font-size:1.05rem;font-weight:700;margin-bottom:0.5rem;">
+            "Empowering educators with data — before it's too late."
+        </div>
+        <div style="color:#a8b2c1;font-size:0.88rem;max-width:600px;margin:0 auto;line-height:1.7;">
+            GradeInsight was built on the belief that machine learning can bridge the gap between
+            raw student data and actionable academic intervention. Every prediction made here
+            is a chance to help a student succeed.
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
 # ── Footer ────────────────────────────────────────────────────────────────────
 st.markdown("""
 <div style="text-align:center;padding:2.5rem 0 1rem;color:#6b7c93;
             font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.12em;">
-    Created By Sahal Fitter · GradeInsight v2.0
+    
 </div>
 """, unsafe_allow_html=True)
