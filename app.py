@@ -121,7 +121,7 @@ with st.sidebar:
         "Dashboard",
         "EDA",
         "Predict Grade",
-        "Bulk Scanner",
+        "Bulk Prediction",
         "Model Performance",
         "About Us",
     ], label_visibility="collapsed")
@@ -290,9 +290,9 @@ elif page == "Predict Grade":
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-#  BULK SCANNER  — automatic feature selection
+#  BULK PREDICTION  — automatic feature selection
 # ══════════════════════════════════════════════════════════════════════════════
-elif page == "Bulk Scanner":
+elif page == "Bulk Prediction":
     st.subheader("🔍 Bulk Scanner — Automatic Feature Detection")
 
     st.markdown("""
