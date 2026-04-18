@@ -293,7 +293,7 @@ elif page == "Predict Grade":
 #  BULK PREDICTION  — automatic feature selection
 # ══════════════════════════════════════════════════════════════════════════════
 elif page == "Bulk Prediction":
-    st.subheader("🔍 Bulk Scanner — Automatic Feature Detection")
+    st.subheader("Bulk Prediction — Automatic Feature Detection")
 
     st.markdown("""
     Upload a CSV file with **any subset** of the model features.  
@@ -458,7 +458,7 @@ elif page == "Model Performance":
     df1 = joblib.load("results_model.pkl")
     table1, = st.tabs(["Model Comparison"])
     with table1:
-        st.dataframe(df1, use_container_width=True)
+        st.dataframe(df1[["model","rmse","r2"]], use_container_width=True)
 
     fig3 = px.bar(df1, x="model", y="r2",
                   title="Model Comparison",
