@@ -571,7 +571,7 @@ elif page == "About Us":
             </div>
             <div class="info-row">
                 <span class="info-icon">🏆</span>
-                <span class="info-text"><strong>Best Model:</strong> Random Forest · R² = 0.87 · MAE = 6.2</span>
+                <span class="info-text"><strong>Best Model:</strong> Linear Regression · R² = 0.80</span>
             </div>
             <div class="info-row">
                 <span class="info-icon">🚀</span>
@@ -593,7 +593,7 @@ elif page == "About Us":
         ("909", "Students in Dataset"),
         ("4", "Total Features"),
         ("4", "Models Evaluated"),
-        ("0.87", "Best R² Score"),
+        ("0.80", "Best R² Score"),
         ("5", "App Pages"),
         ("12 wks", "Dev Timeline"),
     ]
