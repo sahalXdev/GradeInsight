@@ -592,7 +592,7 @@ elif page == "About Us":
     project_stats = [
         ("909", "Students in Dataset"),
         ("4", "Total Features"),
-        ("4", "Models Evaluated"),
+        ("3", "Models Evaluated"),
         ("0.80", "Best R² Score"),
         ("5", "App Pages"),
         ("12 wks", "Dev Timeline"),
